@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  webapp:
+    build:
+      context: ./clowdflows-webapp/.
+      target: dev
+    command: npm run start
+    ports:
+      - 127.0.0.1:8080:8080/tcp
+    volumes:
+      - ./clowdflows-webapp:/app
+  backend:
+    build:
+      context: ./clowdflows-backend/.
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DEBUG=true
+      - DJANGO_SECRET_KEY=w*%2ld*&(-jp0cuukvd&s(c%m3i!fzcgt1edw6g-34q5_ji5m
+      - SQL_HOST=db
+      - SQL_PORT=5432
+      - WAIT_FOR_POSTGRES=true
+      - DATABASE_URL=postgres://postgres:postgres@db/postgres
+    ports:
+      - 127.0.0.1:8000:8000/tcp
+    volumes:
+      - ./clowdflows-backend:/usr/src/app
+  db:
+    image: postgres:10.5-alpine
+    restart: always
+    volumes:
+      - ./target/postgres_data:/var/lib/postgresql/data
+
