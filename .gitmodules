@@ -1,0 +1,6 @@
+[submodule "clowdflows-webapp"]
+	path = clowdflows-webapp
+	url = git@github.com:xflows/clowdflows-webapp.git
+[submodule "clowdflows-backend"]
+	path = clowdflows-backend
+	url = git@github.com:xflows/clowdflows-backend.git
