@@ -6,12 +6,11 @@ services:
       context: ./clowdflows-webapp/.
       target: dev
     command: >
-        sh -c "npm install &&
-               npm run start"
+        sh -c "npm run start"
     ports:
       - 127.0.0.1:8080:8080/tcp
     volumes:
-      - ./clowdflows-webapp:/app
+      - ./clowdflows-webapp/src:/app/src
   backend:
     build:
       context: ./clowdflows-backend/.
