@@ -26,6 +26,7 @@ services:
       - 127.0.0.1:8000:8000/tcp
     volumes:
       - ./clowdflows-backend:/usr/src/app
+#     - ./packages:/usr/src/app/packages
   db:
     image: postgres:10.5-alpine
     restart: always
