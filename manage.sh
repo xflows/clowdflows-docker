@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker-compose run --rm -e MAIN=false backend python manage.py $@
+docker-compose exec backend python manage.py $@
