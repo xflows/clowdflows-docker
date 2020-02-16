@@ -1,5 +1,13 @@
 version: '3.7'
 
+x-environment: &default-env
+  DEBUG: 'true'
+  DJANGO_SECRET_KEY: 'w*%2ld*&(-jp0cuukvd&s(c%m3i!fzcgt1edw6g-34q5_ji5m'
+  SQL_HOST: 'db'
+  SQL_PORT: '5432'
+  WAIT_FOR_POSTGRES: 'true'
+  DATABASE_URL: 'postgres://postgres:postgres@db/postgres'
+
 services:
   webapp:
     build:
@@ -16,12 +24,9 @@ services:
       context: ./clowdflows-backend/.
     command: sh -c "python manage.py runserver 0.0.0.0:8000"
     environment:
-      - DEBUG=true
-      - DJANGO_SECRET_KEY=w*%2ld*&(-jp0cuukvd&s(c%m3i!fzcgt1edw6g-34q5_ji5m
-      - SQL_HOST=db
-      - SQL_PORT=5432
-      - WAIT_FOR_POSTGRES=true
-      - DATABASE_URL=postgres://postgres:postgres@db/postgres
+      <<: *default-env
+      MIGRATE: 'true'
+      COLLECTSTATIC: 'true'
     ports:
       - 127.0.0.1:8000:8000/tcp
     volumes:
